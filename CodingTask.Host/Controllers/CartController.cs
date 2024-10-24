@@ -83,7 +83,7 @@ namespace CodingTask.Host.Controllers
             return Ok();
         }
 
-        [HttpDelete("{productId}")]
+        [HttpDelete("product/{productId}")]
         public async Task<IActionResult> RemoveFromCart(int productId)
         {
             var userId = Convert.ToInt32(_httpContextAccessor.HttpContext?.Items["UserId"]);

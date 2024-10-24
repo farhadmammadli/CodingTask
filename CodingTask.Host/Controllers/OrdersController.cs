@@ -5,6 +5,7 @@ using System;
 using CodingTask.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace CodingTask.Host.Controllers
 {
@@ -13,15 +14,19 @@ namespace CodingTask.Host.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly CodingTaskContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public OrdersController(CodingTaskContext context)
+        public OrdersController(CodingTaskContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost("checkout")]
-        public async Task<IActionResult> Checkout(int userId)
+        public async Task<IActionResult> Checkout()
         {
+            var userId = Convert.ToInt32(_httpContextAccessor.HttpContext?.Items["UserId"]);
+
             var cartItems = await _context.CartItems
                 .Where(c => c.UserId == userId)
                 .Include(c => c.Product)
