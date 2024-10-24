@@ -1,6 +1,6 @@
 using CodingTask.Application.Interfaces;
-using CodingTask.Data;
 using CodingTask.Application.Services;
+using CodingTask.Data;
 using CodingTask.Host.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -47,7 +47,9 @@ namespace CodingTask.Host
 
             services.AddHttpContextAccessor();
             services.AddScoped<IAuthService, AuthService>();
-            //services.AddScoped<ISubmissionService, SubmissionService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<ICartService, CartService>();
 
 
 
