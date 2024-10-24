@@ -122,7 +122,7 @@ namespace CodingTask.Host
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
             // Add UserIdMiddleware to the pipeline for demo purposes
-            app.UseMiddleware<UserIdMiddleware>();
+            //app.UseMiddleware<UserIdMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

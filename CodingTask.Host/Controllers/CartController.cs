@@ -44,7 +44,7 @@ namespace CodingTask.Host.Controllers
         [HttpPut("{productId}")]
         public async Task<IActionResult> UpdateCartItem(int productId, int quantity)
         {
-            var cartItem = await _context.CartItems.Where(x=>x.ProductId == productId && );
+            var cartItem = await _context.CartItems.Where(x => x.ProductId == productId).FirstOrDefaultAsync();
             if (cartItem == null) return NotFound();
 
             cartItem.Quantity = quantity;

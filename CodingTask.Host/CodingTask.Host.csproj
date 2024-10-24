@@ -8,17 +8,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\CodingTask.Application\CodingTask.Application.csproj" />
 		<ProjectReference Include="..\CodingTask.Data\CodingTask.Data.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="wwwroot\img\" />
 	</ItemGroup>
 
 </Project>
