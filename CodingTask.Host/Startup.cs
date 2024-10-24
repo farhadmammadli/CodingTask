@@ -45,11 +45,9 @@ namespace CodingTask.Host
                         .EnableSensitiveDataLogging()
                         .EnableDetailedErrors());
 
-            services.AddSingleton<IHashService>(new HashService(configuration.GetSection("HashSalt").Get<string>()));
             services.AddHttpContextAccessor();
             services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IMatchService, MatchService>();
-            services.AddScoped<ISubmissionService, SubmissionService>();
+            //services.AddScoped<ISubmissionService, SubmissionService>();
 
 
 

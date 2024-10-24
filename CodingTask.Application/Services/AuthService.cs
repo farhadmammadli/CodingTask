@@ -15,7 +15,6 @@ namespace CodingTask.Application.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IHashService _hashService;
         private readonly IConfiguration _configuration;
         private readonly ILogger<AuthService> _logger;
         private readonly CodingTaskContext _dbContext;
@@ -24,12 +23,10 @@ namespace CodingTask.Application.Services
         private const string InternalAuthorizationError = "An internal authorization error occured. Please contact administrator.";
 
         public AuthService(
-            IHashService hashService,
             ILogger<AuthService> logger,
             IConfiguration configuration,
             CodingTaskContext dbContext)
         {
-            _hashService = hashService;
             _configuration = configuration;
             _dbContext = dbContext;
             _logger = logger;
@@ -44,11 +41,11 @@ namespace CodingTask.Application.Services
             }
 
             User user;
-            var hashPassword = await _hashService.HashText(model.Password);
+            var hashPassword = "";
 
             try
             {
-                user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserName == model.Username && u.Password == hashPassword);
+                user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == model.Username && u.Password == hashPassword);
             }
             catch (Exception ex)
             {
@@ -61,7 +58,7 @@ namespace CodingTask.Application.Services
                 throw new AppException(InvalidUserNameOrPassword);
             }
 
-            var jwtToken = GenerateJwtToken(user.Id.ToString(), user.UserName);
+            var jwtToken = GenerateJwtToken(user.UserId.ToString(), user.Username);
 
             return new AuthenticateResponseDto
             {

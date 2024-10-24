@@ -1,5 +1,4 @@
-﻿using Cleverbit.CodingTask.Utilities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +6,7 @@ namespace CodingTask.Data
 {
     public static class CodingTaskContextExtensions
     {
-        public static async Task Initialize(this CodingTaskContext context, IHashService hashService)
+        public static async Task Initialize(this CodingTaskContext context)
         {
             await context.Database.EnsureDeletedAsync();
             await context.Database.EnsureCreatedAsync();
@@ -16,45 +15,45 @@ namespace CodingTask.Data
 
             bool anyNewUser = false;
 
-            if (!currentUsers.Any(u => u.UserName == "User1"))
+            if (!currentUsers.Any(u => u.Username == "User1"))
             {
                 context.Users.Add(new Models.User
                 {
-                    UserName = "User1",
-                    Password = await hashService.HashText("Password1")
+                    Username = "User1",
+                    Password = ""
                 });
 
                 anyNewUser = true;
             }
 
-            if (!currentUsers.Any(u => u.UserName == "User2"))
+            if (!currentUsers.Any(u => u.Username == "User2"))
             {
                 context.Users.Add(new Models.User
                 {
-                    UserName = "User2",
-                    Password = await hashService.HashText("Password2")
+                    Username = "User2",
+                    Password = ""
                 });
 
                 anyNewUser = true;
             }
 
-            if (!currentUsers.Any(u => u.UserName == "User3"))
+            if (!currentUsers.Any(u => u.Username == "User3"))
             {
                 context.Users.Add(new Models.User
                 {
-                    UserName = "User3",
-                    Password = await hashService.HashText("Password3")
+                    Username = "User3",
+                    Password = ""
                 });
 
                 anyNewUser = true;
             }
 
-            if (!currentUsers.Any(u => u.UserName == "User4"))
+            if (!currentUsers.Any(u => u.Username == "User4"))
             {
                 context.Users.Add(new Models.User
                 {
-                    UserName = "User4",
-                    Password = await hashService.HashText("Password4")
+                    Username = "User4",
+                    Password = ""
                 });
 
                 anyNewUser = true;

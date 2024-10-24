@@ -4,11 +4,11 @@ namespace CodingTask.Data.Models
 {
     public class User
     {
-        public int Id { get; set; }
-        public string UserName { get; set; }
+        public int UserId { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
-
-        public ICollection<Submission> Submissions { get; set; }
-        public ICollection<Match> MatchesWon { get; set; }
+        public List<Order> Orders { get; set; } = new List<Order>();
+        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
     }
 }
