@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CodingTask.Data;
 
 namespace CodingTask.Host.Middlewares
 {
@@ -14,22 +15,23 @@ namespace CodingTask.Host.Middlewares
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context, CodingTaskContext dbContext)
         {
-            // Example: Extracting the user ID from JWT claims (if using JWT authentication)
-            if (context.User.Identity is ClaimsIdentity identity && identity.IsAuthenticated)
-            {
-                // Get the user ID claim (assuming the claim type is "UserId")
-                var userIdClaim = identity.Claims.FirstOrDefault(c => c.Type == "UserId");
+            var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Username == "User1");
 
-                if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
+            if (user != null)
+            {
+                var claims = new[]
                 {
-                    // Set the user ID in the HttpContext.Items collection
-                    context.Items["UserId"] = userId;
-                }
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim("UserId", user.Id.ToString())
+                };
+
+                var userIdentity = new ClaimsIdentity(claims, "Custom");
+                context.User = new ClaimsPrincipal(userIdentity);
+                context.Items["UserId"] = user.Id;
             }
 
-            // Call the next middleware in the pipeline
             await _next(context);
         }
     }
