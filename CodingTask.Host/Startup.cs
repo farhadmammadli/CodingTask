@@ -40,10 +40,8 @@ namespace CodingTask.Host
                 });
             });
 
-            services.AddDbContext<CodingTaskContext>(options => options
-                        .UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
-                        .EnableSensitiveDataLogging()
-                        .EnableDetailedErrors());
+            services.AddDbContext<CodingTaskContext>(options =>
+              options.UseInMemoryDatabase("Test"));
 
             services.AddHttpContextAccessor();
             services.AddScoped<IAuthService, AuthService>();

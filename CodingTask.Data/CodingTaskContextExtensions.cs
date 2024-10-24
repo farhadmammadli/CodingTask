@@ -63,6 +63,78 @@ namespace CodingTask.Data
             {
                 await context.SaveChangesAsync(); 
             }
+
+
+
+
+
+
+
+            // Product seeding logic
+            var currentProducts = await context.Products.ToListAsync();
+            bool anyNewProduct = false;
+
+            if (!currentProducts.Any(p => p.Name == "Laptop"))
+            {
+                context.Products.Add(new Models.Product
+                {
+                    Name = "Laptop",
+                    Description = "A high-performance laptop",
+                    Price = 999.99m,
+                    Stock = 10,
+                    ImgPath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg"
+
+                });
+                anyNewProduct = true;
+            }
+
+            if (!currentProducts.Any(p => p.Name == "Smartphone"))
+            {
+                context.Products.Add(new Models.Product
+                {
+                    Name = "Smartphone",
+                    Description = "A new-gen smartphone",
+                    Price = 699.99m,
+                    Stock = 20,
+                    ImgPath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg"
+                });
+                anyNewProduct = true;
+            }
+
+            if (!currentProducts.Any(p => p.Name == "Headphones"))
+            {
+                context.Products.Add(new Models.Product
+                {
+                    Name = "Headphones",
+                    Description = "Noise-cancelling headphones",
+                    Price = 199.99m,
+                    Stock = 30,
+                    ImgPath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg"
+                });
+                anyNewProduct = true;
+            }
+
+            if (!currentProducts.Any(p => p.Name == "Monitor"))
+            {
+                context.Products.Add(new Models.Product
+                {
+                    Name = "Monitor",
+                    Description = "4K Ultra HD Monitor",
+                    Price = 299.99m,
+                    Stock = 15,
+                    ImgPath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg"
+                });
+                anyNewProduct = true;
+            }
+
+            if (anyNewProduct)
+            {
+                await context.SaveChangesAsync();
+            }
+
+
+
+
         }
     }
 }
