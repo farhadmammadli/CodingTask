@@ -1,0 +1,27 @@
+services:
+  
+  coding-task-backend:
+    container_name: coding-task-backend
+    restart: always
+    volumes:
+      - '/var/log/coding-task-backend:/app/log'
+    environment:
+      - TZ=Asia/Tbilisi
+      - ASPNETCORE_ENVIRONMENT=Production
+      - VIRTUAL_HOST=coding-task-backend.farhadmammadli.com
+      - VIRTUAL_PORT=8080
+    hostname: coding-task-backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1gb
+    build:
+      context: .
+      dockerfile: CodingTask.Host/Dockerfile
+    image: backend-test-task
+
+networks:
+  default:
+    external: true
+    name: nat  
