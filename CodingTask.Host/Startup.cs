@@ -112,7 +112,7 @@ namespace CodingTask.Host
             }
 
             app.UseRouting();
-
+            app.UseStaticFiles();
             app.UseSwagger();
             app.UseSwaggerUI();
 
