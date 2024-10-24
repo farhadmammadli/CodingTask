@@ -1,7 +1,6 @@
-﻿using CodingTask.Data;
+﻿using CodingTask.Application.Interfaces;
 using CodingTask.Data.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,25 +10,25 @@ namespace CodingTask.Host.Controllers
     [Route("api/products")]
     public class ProductsController : ControllerBase
     {
-        private readonly CodingTaskContext _context;
+        private readonly IProductService _service;
 
-        public ProductsController(CodingTaskContext context)
+        public ProductsController(IProductService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            return await _context.Products.ToListAsync();
+            var result = _service.GetProducts();
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null) return NotFound();
-            return product;
+            var result = _service.GetProduct(id);
+            return Ok(result);
         }
     }
 

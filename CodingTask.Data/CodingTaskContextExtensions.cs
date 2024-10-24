@@ -66,10 +66,6 @@ namespace CodingTask.Data
 
 
 
-
-
-
-
             // Product seeding logic
             var currentProducts = await context.Products.ToListAsync();
             bool anyNewProduct = false;
@@ -131,8 +127,6 @@ namespace CodingTask.Data
             {
                 await context.SaveChangesAsync();
             }
-
-
 
 
         }
