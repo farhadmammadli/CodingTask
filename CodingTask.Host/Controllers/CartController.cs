@@ -41,10 +41,10 @@ namespace CodingTask.Host.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCartItem(int id, int quantity)
+        [HttpPut("{productId}")]
+        public async Task<IActionResult> UpdateCartItem(int productId, int quantity)
         {
-            var cartItem = await _context.CartItems.FindAsync(id);
+            var cartItem = await _context.CartItems.Where(x=>x.ProductId == productId && );
             if (cartItem == null) return NotFound();
 
             cartItem.Quantity = quantity;
@@ -55,6 +55,18 @@ namespace CodingTask.Host.Controllers
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveFromCart(int id)
+        {
+            var cartItem = await _context.CartItems.FindAsync(id);
+            if (cartItem == null) return NotFound();
+
+            _context.CartItems.Remove(cartItem);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpDelete()]
+        public async Task<IActionResult> EmptyCart(int id)
         {
             var cartItem = await _context.CartItems.FindAsync(id);
             if (cartItem == null) return NotFound();

@@ -121,6 +121,9 @@ namespace CodingTask.Host
             app.UseAuthorization();
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
+            // Add UserIdMiddleware to the pipeline for demo purposes
+            app.UseMiddleware<UserIdMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
