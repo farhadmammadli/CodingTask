@@ -17,4 +17,8 @@
 		<ProjectReference Include="..\CodingTask.Data\CodingTask.Data.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\img\" />
+	</ItemGroup>
+
 </Project>

@@ -58,7 +58,7 @@ namespace CodingTask.Application.Services
                 throw new AppException(InvalidUserNameOrPassword);
             }
 
-            var jwtToken = GenerateJwtToken(user.UserId.ToString(), user.Username);
+            var jwtToken = GenerateJwtToken(user.Id.ToString(), user.Username);
 
             return new AuthenticateResponseDto
             {
