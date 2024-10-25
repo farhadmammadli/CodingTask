@@ -27,7 +27,7 @@ services:
     environment:
       - TZ=Asia/Tbilisi
       - VIRTUAL_HOST=coding-task-ui.farhadmammadli.com
-      - VIRTUAL_PORT=8080
+      - VIRTUAL_PORT=80
     hostname: coding-task-ui
     deploy:
       resources:
