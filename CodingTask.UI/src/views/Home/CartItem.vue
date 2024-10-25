@@ -5,22 +5,35 @@ import { Button } from '@/components/ui/button'
 import { Product } from '@/api/models'
 import { BASE_URL } from '@/api/http';
 import { RootState } from '@/store';
+import { handleError } from '@/utils/errorHandler';
 
 const store = useStore<RootState>();
 const props = defineProps<{ product: Product; quantity: number }>()
 
-function removeFromCart(product: Product) {
-  store.dispatch('cart/removeFromCart', product);
+async function removeFromCart(product: Product) {
+  try {
+    await store.dispatch('cart/removeFromCart', product);
+  } catch (error) {
+    handleError(error);
+  }
 }
 
-
-function increment(product: Product) {
-  store.dispatch('cart/addProductToCart', { product, quantity: 1 })
+async function increment(product: Product) {
+  try {
+    await store.dispatch('cart/addProductToCart', { product, quantity: 1 });
+  } catch (error) {
+    handleError(error);
+  }
 }
 
-function decrement(product: Product) {
-  store.dispatch('cart/addProductToCart', { product, quantity: -1 })
+async function decrement(product: Product) {
+  try {
+    await store.dispatch('cart/addProductToCart', { product, quantity: -1 });
+  } catch (error) {
+    handleError(error);
+  }
 }
+
 </script>
 
 <template>

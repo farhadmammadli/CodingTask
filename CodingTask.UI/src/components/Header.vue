@@ -45,7 +45,9 @@ const cartItemsCount = computed(() => store.state.cart.items.length)
 }
 
 .cart-item-count {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 20px;
   height: 20px;
   border-radius: 50%;

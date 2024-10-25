@@ -19,18 +19,23 @@ import { Button } from '@/components/ui/button'
 import { RootState } from '@/store'
 import { BASE_URL } from '@/api/http'
 import { Product } from '@/api/models'
+import { handleError } from '@/utils/errorHandler';
 
 const store = useStore<RootState>()
-
 const products = computed(() => store.state.products.all)
 
 onMounted(() => {
   store.dispatch('products/getAllProducts')
 })
 
-function addToCart(product: Product) {
-  store.dispatch('cart/addProductToCart', { product, quantity: 1 })
+async function addToCart(product: Product) {
+  try {
+    await store.dispatch('cart/addProductToCart', { product, quantity: 1 })
+  } catch (error) {
+    handleError(error)
+  }
 }
+
 </script>
 
 <template>

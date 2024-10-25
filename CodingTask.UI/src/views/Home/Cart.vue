@@ -4,19 +4,27 @@ import CartItem from './CartItem.vue'
 import { useStore } from 'vuex'
 import { RootState } from '@/store'
 import { computed } from 'vue'
+import { handleError } from '@/utils/errorHandler';
 
 const store = useStore<RootState>()
 
-const cartItems = computed(() => store.state.cart.items)
-const cartTotal = computed(() =>
-  store.state.cart.items.reduce((acc, item) => {
-    return acc + item.quantity * item.product.price
-  }, 0)
-)
+const cartItems = computed(() => store.state.cart.items);
+const cartTotal = computed(() => 
+  Math.round(
+    store.state.cart.items.reduce((acc, item) => {
+      return acc + item.quantity * item.product.price * 100;
+    }, 0)
+  ) / 100
+);
 
-function checkout() {
-  store.dispatch('cart/checkout')
+async function checkout(product: Product) {
+  try {
+    await store.dispatch('cart/checkout')
+  } catch (error) {
+    handleError(error)
+  }
 }
+
 </script>
 
 <template>
