@@ -25,7 +25,7 @@ namespace CodingTask.Host.Controllers
         [HttpPost("checkout")]
         public async Task<IActionResult> Checkout()
         {
-            var result = _service.Checkout();
+            var result = await _service.Checkout();
             return Ok(result);
         }
     }

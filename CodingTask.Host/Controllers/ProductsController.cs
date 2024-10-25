@@ -20,14 +20,14 @@ namespace CodingTask.Host.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            var result = _service.GetProducts();
+            var result = await _service.GetProducts();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var result = _service.GetProduct(id);
+            var result = await _service.GetProduct(id);
             return Ok(result);
         }
     }
