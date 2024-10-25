@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using System.Text;
-using CodingTask.Data.Models;
 using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
@@ -20,7 +19,6 @@ namespace CodingTask.Application.Services
         private readonly CodingTaskContext _dbContext;
 
         private const string InvalidUserNameOrPassword = "Invalid Username or Password";
-        private const string InternalAuthorizationError = "An internal authorization error occured. Please contact administrator.";
 
         public AuthService(
             ILogger<AuthService> logger,
@@ -40,22 +38,12 @@ namespace CodingTask.Application.Services
                 throw new AppException(InvalidUserNameOrPassword);
             }
 
-            User user;
-            var hashPassword = "";
+            var user = await _dbContext.Users.SingleOrDefaultAsync(x => x.Username == model.Username);
 
-            try
-            {
-                user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == model.Username && u.Password == hashPassword);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An exception occured when querying user");
-                throw new AppException(InternalAuthorizationError);
-            }
-
-            if (user == null)
+            if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             {
                 throw new AppException(InvalidUserNameOrPassword);
+
             }
 
             var jwtToken = GenerateJwtToken(user.Id.ToString(), user.Username);

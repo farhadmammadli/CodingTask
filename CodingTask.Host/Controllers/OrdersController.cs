@@ -1,11 +1,5 @@
-﻿using CodingTask.Data.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using System;
-using CodingTask.Data;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
 using CodingTask.Application.Interfaces;
 
 namespace CodingTask.Host.Controllers
