@@ -19,7 +19,25 @@ services:
     build:
       context: .
       dockerfile: CodingTask.Host/Dockerfile
-    image: backend-test-task
+    image: coding-task-backend
+
+  coding-task-ui:
+    container_name: coding-task-ui
+    restart: always
+    environment:
+      - TZ=Asia/Tbilisi
+      - VIRTUAL_HOST=coding-task-ui.farhadmammadli.com
+      - VIRTUAL_PORT=3000
+    hostname: coding-task-ui
+    deploy:
+      resources:
+        limits:
+          cpus: "0.9"
+          memory: 4gb
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: coding-task-ui
 
 networks:
   default:
