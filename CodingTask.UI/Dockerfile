@@ -1,7 +1,7 @@
 # Step 1: Build the Vue app
 FROM node:18 AS build
 
-WORKDIR /app
+WORKDIR /app/ui
 
 # Copy package.json and package-lock.json to install dependencies
 COPY package*.json ./
