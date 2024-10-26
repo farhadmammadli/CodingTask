@@ -35,7 +35,7 @@ services:
           cpus: "0.9"
           memory: 4gb
     build:
-      context: ./CodingTask.UI
+      context: .
       dockerfile: CodingTask.UI/Dockerfile
     image: coding-task-ui
 
