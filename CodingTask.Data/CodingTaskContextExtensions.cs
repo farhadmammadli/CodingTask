@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CodingTask.Data
@@ -13,64 +12,48 @@ namespace CodingTask.Data
 
             var currentUsers = await context.Users.ToListAsync();
 
-            bool anyNewUser = false;
-
-            if (!currentUsers.Any(u => u.Username == "User1"))
+            if (!currentUsers.Exists(u => u.Username == "User1"))
             {
                 context.Users.Add(new Models.User
                 {
                     Username = "User1",
                     Password = ""
                 });
-
-                anyNewUser = true;
             }
 
-            if (!currentUsers.Any(u => u.Username == "User2"))
+            if (!currentUsers.Exists(u => u.Username == "User2"))
             {
                 context.Users.Add(new Models.User
                 {
                     Username = "User2",
                     Password = ""
                 });
-
-                anyNewUser = true;
             }
 
-            if (!currentUsers.Any(u => u.Username == "User3"))
+            if (!currentUsers.Exists(u => u.Username == "User3"))
             {
                 context.Users.Add(new Models.User
                 {
                     Username = "User3",
                     Password = ""
                 });
-
-                anyNewUser = true;
             }
 
-            if (!currentUsers.Any(u => u.Username == "User4"))
+            if (!currentUsers.Exists(u => u.Username == "User4"))
             {
                 context.Users.Add(new Models.User
                 {
                     Username = "User4",
                     Password = ""
                 });
-
-                anyNewUser = true;
-            }
-
-            if (anyNewUser)
-            {
-                await context.SaveChangesAsync(); 
             }
 
 
 
             // Product seeding logic
             var currentProducts = await context.Products.ToListAsync();
-            bool anyNewProduct = false;
 
-            if (!currentProducts.Any(p => p.Name == "Laptop"))
+            if (!currentProducts.Exists(p => p.Name == "Laptop"))
             {
                 context.Products.Add(new Models.Product
                 {
@@ -78,13 +61,12 @@ namespace CodingTask.Data
                     Description = "A high-performance laptop",
                     Price = 999.99m,
                     Stock = 10,
-                    ImgPath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg"
+                    ImgPath = "/img/76e0e955-7d69-4045-8dad-2bcd7ce23e56.jpg"
 
                 });
-                anyNewProduct = true;
             }
 
-            if (!currentProducts.Any(p => p.Name == "Smartphone"))
+            if (!currentProducts.Exists(p => p.Name == "Smartphone"))
             {
                 context.Products.Add(new Models.Product
                 {
@@ -94,10 +76,9 @@ namespace CodingTask.Data
                     Stock = 20,
                     ImgPath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg"
                 });
-                anyNewProduct = true;
             }
 
-            if (!currentProducts.Any(p => p.Name == "Headphones"))
+            if (!currentProducts.Exists(p => p.Name == "Headphones"))
             {
                 context.Products.Add(new Models.Product
                 {
@@ -105,12 +86,11 @@ namespace CodingTask.Data
                     Description = "Noise-cancelling headphones",
                     Price = 199.99m,
                     Stock = 30,
-                    ImgPath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg"
+                    ImgPath = "/img/2cb4c65a-b331-44a0-b896-d0cde08ca3dd.jpg"
                 });
-                anyNewProduct = true;
             }
 
-            if (!currentProducts.Any(p => p.Name == "Monitor"))
+            if (!currentProducts.Exists(p => p.Name == "Monitor"))
             {
                 context.Products.Add(new Models.Product
                 {
@@ -120,13 +100,9 @@ namespace CodingTask.Data
                     Stock = 15,
                     ImgPath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg"
                 });
-                anyNewProduct = true;
             }
 
-            if (anyNewProduct)
-            {
-                await context.SaveChangesAsync();
-            }
+            await context.SaveChangesAsync();
 
 
         }
