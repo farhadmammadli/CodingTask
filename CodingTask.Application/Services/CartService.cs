@@ -1,5 +1,7 @@
 ﻿using CodingTask.Application.Exceptions;
 using CodingTask.Application.Interfaces;
+using CodingTask.Application.Mapping;
+using CodingTask.Application.Models;
 using CodingTask.Data;
 using CodingTask.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -17,14 +19,18 @@ namespace CodingTask.Application.Services
             _authService = authService;
         }
 
-        public async Task<IEnumerable<CartItem>> GetCartItems()
+        public async Task<IEnumerable<CartItemDto>> GetCartItems()
         {
             var userId = _authService.GetCurrentUserId();
 
-            return await _context.CartItems
+            var list = await _context.CartItems
                 .Where(c => c.UserId == userId)
                 .Include(c => c.Product)
+                .ThenInclude(x => x.ProductImages)
+                .Select(x => x.ToCartItemDto())
                 .ToListAsync();
+            
+            return list;
         }
 
         public async Task AddToCart(int productId, int quantity)

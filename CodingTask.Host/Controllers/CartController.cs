@@ -1,5 +1,5 @@
 ﻿using CodingTask.Application.Interfaces;
-using CodingTask.Data.Models;
+using CodingTask.Application.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,7 +18,7 @@ namespace CodingTask.Host.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CartItem>>> GetCartItems()
+        public async Task<ActionResult<IEnumerable<CartItemDto>>> GetCartItems()
         {
             var result = await _service.GetCartItems();
             return Ok(result);

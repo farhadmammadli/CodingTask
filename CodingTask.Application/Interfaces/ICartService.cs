@@ -1,10 +1,10 @@
-﻿using CodingTask.Data.Models;
+﻿using CodingTask.Application.Models;
 
 namespace CodingTask.Application.Interfaces
 {
     public interface ICartService
     {
-        Task<IEnumerable<CartItem>> GetCartItems();
+        Task<IEnumerable<CartItemDto>> GetCartItems();
         Task AddToCart(int productId, int quantity);
         Task RemoveFromCart(int productId);
         Task EmptyCart();
