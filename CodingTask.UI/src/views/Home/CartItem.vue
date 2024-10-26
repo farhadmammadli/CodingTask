@@ -9,7 +9,7 @@ import { handleError } from '@/utils/errorHandler';
 
 const store = useStore<RootState>();
 const props = defineProps<{ product: Product; quantity: number }>()
-
+console.log(props.product);
 async function removeFromCart(product: Product) {
   try {
     await store.dispatch('cart/removeFromCart', product);
@@ -39,7 +39,8 @@ async function decrement(product: Product) {
 <template>
   <div class="border-b py-4 flex items-start justify-between">
     <div class="flex items-start space-x-4">
-      <img :src="BASE_API_URL + props.product.images[0]" width="80px" height="96px" alt="product image" />
+      <img :src="`${BASE_API_URL}/${props.product.images?.[0]}`" width="80px" height="96px" alt="product image" />
+
       <div>
         <h2 class="text-lg font-medium">{{ props.product.name }}</h2>
         <p class="text-sm text-[#6C7275]">

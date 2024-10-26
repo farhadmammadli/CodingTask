@@ -13,6 +13,7 @@ namespace CodingTask.Application.Mapping
                 Name = model.Name,
                 Description = model.Description,
                 Price = model.Price,
+                Stock = model.Stock,
                 Images = model.ProductImages!.Select(x => x.ImagePath).ToList(),
             };
         }
