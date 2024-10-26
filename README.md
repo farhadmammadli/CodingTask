@@ -1,10 +1,7 @@
-# Install dependencies
-Run project with IIS Express
+# Run web api
+Run project with kestrel (http)
 
-# Run the project
-npm run dev
-
-
+# Run client app
 
 #DEMO:
 https://coding-task-ui.farhadmammadli.com/
