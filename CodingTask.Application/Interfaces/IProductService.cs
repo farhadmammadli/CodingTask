@@ -1,11 +1,10 @@
-﻿using CodingTask.Data.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using CodingTask.Application.Models;
 
 namespace CodingTask.Application.Interfaces
 {
     public interface IProductService
     {
-        Task<IEnumerable<Product>> GetProducts();
-        Task<Product> GetProduct(int id);
+        Task<IEnumerable<ProductDto>> GetProducts();
+        Task<ProductDto> GetProduct(int id);
     }
 }

@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace CodingTask.Data.Models
+﻿namespace CodingTask.Application.Models
 {
-    public class Product
+    public class ProductDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
-        public List<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
-
+        public List<string> Images { get; set; }
     }
 }

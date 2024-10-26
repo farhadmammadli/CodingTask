@@ -1,6 +1,7 @@
 ﻿using CodingTask.Application.Interfaces;
+using CodingTask.Application.Mapping;
+using CodingTask.Application.Models;
 using CodingTask.Data;
-using CodingTask.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodingTask.Application.Services
@@ -14,19 +15,20 @@ namespace CodingTask.Application.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Product>> GetProducts()
+        public async Task<IEnumerable<ProductDto>> GetProducts()
         {
-            return await _context.Products.ToListAsync();
+            var list = await _context.Products.Select(x => x.ToProductDto()).ToListAsync();
+            return list;
         }
 
-        public async Task<Product> GetProduct(int id)
+        public async Task<ProductDto> GetProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
             if (product == null)
             {
                 throw new KeyNotFoundException("Product is not found");
             }
-            return product;
+            return product.ToProductDto();
         }
     }
 }

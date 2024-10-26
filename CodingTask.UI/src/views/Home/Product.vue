@@ -83,14 +83,12 @@ async function addToCart(product: Product) {
     <div class="my-8">
       <Carousel>
         <CarouselContent>
-          <CarouselItem class="basis-1/3">
-            <img :src="BASE_URL + product.imgPath" alt="image of carousel" />
-          </CarouselItem>
-          <CarouselItem class="basis-1/3">
-            <img :src="BASE_URL + product.imgPath" alt="image of carousel" />
-          </CarouselItem>
-          <CarouselItem class="basis-1/3">
-            <img :src="BASE_URL + product.imgPath" alt="image of carousel" />
+          <CarouselItem
+            v-for="(imgPath, index) in product.images"
+            :key="index"
+            class="basis-1/3"
+          >
+            <img :src="`${BASE_URL}${imgPath}`" alt="carousel image" />
           </CarouselItem>
         </CarouselContent>
       </Carousel>

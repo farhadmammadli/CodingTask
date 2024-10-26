@@ -1,4 +1,5 @@
 ﻿using CodingTask.Application.Interfaces;
+using CodingTask.Application.Models;
 using CodingTask.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -18,14 +19,14 @@ namespace CodingTask.Host.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
         {
             var result = await _service.GetProducts();
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
         {
             var result = await _service.GetProduct(id);
             return Ok(result);

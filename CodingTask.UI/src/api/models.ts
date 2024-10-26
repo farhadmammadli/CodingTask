@@ -4,7 +4,7 @@ export type Product = {
   description: string
   price: number
   stock: number
-  imgPath: string
+  images: string[]
 }
 
 export type CartItem = {

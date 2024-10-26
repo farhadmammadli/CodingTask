@@ -52,6 +52,14 @@ namespace CodingTask.Data
                 .WithMany()
                 .HasForeignKey(oi => oi.ProductId)
                 .HasPrincipalKey(p => p.Id);
+
+            // ProductImage: Product relationship
+            modelBuilder.Entity<ProductImage>()
+                .HasOne(p => p.Product)
+                .WithMany(c => c.ProductImages)
+                .HasForeignKey(p => p.ProductId)
+                .HasPrincipalKey(c => c.Id);
+
         }
     }
 }
