@@ -17,7 +17,7 @@ const cartTotal = computed(() =>
   ) / 100
 );
 
-async function checkout(product: Product) {
+async function checkout() {
   try {
     await store.dispatch('cart/checkout')
   } catch (error) {
