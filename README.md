@@ -1,7 +1,7 @@
-# Run web api
-Run project with kestrel (http)
+# Run web api with kestrel (http)
 
 # Run client app
 
-#DEMO:
+=======================
+# DEMO:
 https://coding-task-ui.farhadmammadli.com/
