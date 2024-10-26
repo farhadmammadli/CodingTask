@@ -34,7 +34,7 @@ namespace CodingTask.Application.Services
             var order = new Order { UserId = userId, OrderDate = DateTime.Now };
             foreach (var item in cartItems)
             {
-                order.OrderItems.Add(new OrderItem { ProductId = item.ProductId, Quantity = item.Quantity });
+                order.OrderItems.Add(new OrderItem { ProductId = item.ProductId, Product = item.Product, Quantity = item.Quantity });
                 item.Product.Stock -= item.Quantity;
             }
 

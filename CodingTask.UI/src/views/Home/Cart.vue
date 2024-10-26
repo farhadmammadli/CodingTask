@@ -5,6 +5,7 @@ import { useStore } from 'vuex'
 import { RootState } from '@/store'
 import { computed } from 'vue'
 import { handleError } from '@/utils/errorHandler';
+import Swal from 'sweetalert2'
 
 const store = useStore<RootState>()
 
@@ -19,7 +20,12 @@ const cartTotal = computed(() =>
 
 async function checkout() {
   try {
-    await store.dispatch('cart/checkout')
+    await store.dispatch('cart/checkout');
+    Swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: "Your order has been placed successfully",
+    });
   } catch (error) {
     handleError(error)
   }
