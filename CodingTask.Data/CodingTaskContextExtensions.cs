@@ -51,9 +51,9 @@ namespace CodingTask.Data
                     Price = 699.99m,
                     Stock = 20,
                     ProductImages = {
-                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8" },
-                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8" },
-                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8" }
+                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg" },
+                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg" },
+                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg" }
                     }
                 });
             }
@@ -67,9 +67,9 @@ namespace CodingTask.Data
                     Price = 199.99m,
                     Stock = 30,
                     ProductImages = {
-                        new ProductImage { ImagePath = "/img/2cb4c65a-b331-44a0-b896-d0cde08ca3dd" },
-                        new ProductImage { ImagePath = "/img/2cb4c65a-b331-44a0-b896-d0cde08ca3dd" },
-                        new ProductImage { ImagePath = "/img/2cb4c65a-b331-44a0-b896-d0cde08ca3dd" }
+                        new ProductImage { ImagePath = "/img/2cb4c65a-b331-44a0-b896-d0cde08ca3dd.jpg" },
+                        new ProductImage { ImagePath = "/img/2cb4c65a-b331-44a0-b896-d0cde08ca3dd.jpg" },
+                        new ProductImage { ImagePath = "/img/2cb4c65a-b331-44a0-b896-d0cde08ca3dd.jpg" }
                     }
                 });
             }
@@ -83,9 +83,9 @@ namespace CodingTask.Data
                     Price = 299.99m,
                     Stock = 15,
                     ProductImages = {
-                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8" },
-                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8" },
-                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8" }
+                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg" },
+                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg" },
+                        new ProductImage { ImagePath = "/img/0deb0480-9e0e-43a7-9a13-eae2650908c8.jpg" }
                     }
                 });
             }

@@ -17,13 +17,13 @@ namespace CodingTask.Application.Services
 
         public async Task<IEnumerable<ProductDto>> GetProducts()
         {
-            var list = await _context.Products.Select(x => x.ToProductDto()).ToListAsync();
+            var list = await _context.Products.Include(x => x.ProductImages).Select(x => x.ToProductDto()).ToListAsync();
             return list;
         }
 
         public async Task<ProductDto> GetProduct(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.Include(x => x.ProductImages).FirstOrDefaultAsync(x => x.Id == id);
             if (product == null)
             {
                 throw new KeyNotFoundException("Product is not found");

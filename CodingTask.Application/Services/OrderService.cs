@@ -2,7 +2,6 @@
 using CodingTask.Application.Interfaces;
 using CodingTask.Data;
 using CodingTask.Data.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodingTask.Application.Services
@@ -10,17 +9,17 @@ namespace CodingTask.Application.Services
     public class OrderService : IOrderService
     {
         private readonly CodingTaskContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IAuthService _authService;
 
-        public OrderService(CodingTaskContext context, IHttpContextAccessor httpContextAccessor)
+        public OrderService(CodingTaskContext context, IAuthService authService)
         {
             _context = context;
-            _httpContextAccessor = httpContextAccessor;
+            _authService = authService;
         }
 
         public async Task<Order> Checkout()
         {
-            var userId = Convert.ToInt32(_httpContextAccessor.HttpContext?.Items["UserId"]);
+            var userId = _authService.GetCurrentUserId();
 
             var cartItems = await _context.CartItems
                 .Where(c => c.UserId == userId)

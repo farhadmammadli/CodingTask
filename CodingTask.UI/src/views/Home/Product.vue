@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/carousel'
 import { Button } from '@/components/ui/button'
 import { RootState } from '@/store'
-import { BASE_URL } from '@/api/http'
+import { BASE_API_URL } from '@/api/http'
 import { Product } from '@/api/models'
 import { handleError } from '@/utils/errorHandler';
 
@@ -88,7 +88,7 @@ async function addToCart(product: Product) {
             :key="index"
             class="basis-1/3"
           >
-            <img :src="`${BASE_URL}${imgPath}`" alt="carousel image" />
+            <img :src="`${BASE_API_URL}${imgPath}`" alt="carousel image" />
           </CarouselItem>
         </CarouselContent>
       </Carousel>

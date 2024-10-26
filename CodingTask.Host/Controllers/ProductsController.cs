@@ -1,6 +1,5 @@
 ﻿using CodingTask.Application.Interfaces;
 using CodingTask.Application.Models;
-using CodingTask.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;

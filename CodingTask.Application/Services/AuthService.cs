@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http;
 
 namespace CodingTask.Application.Services
 {
@@ -17,19 +18,27 @@ namespace CodingTask.Application.Services
         private readonly IConfiguration _configuration;
         private readonly ILogger<AuthService> _logger;
         private readonly CodingTaskContext _dbContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         private const string InvalidUserNameOrPassword = "Invalid Username or Password";
 
         public AuthService(
             ILogger<AuthService> logger,
             IConfiguration configuration,
-            CodingTaskContext dbContext)
+            CodingTaskContext dbContext,
+            IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
             _dbContext = dbContext;
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
         }
 
+        public int GetCurrentUserId()
+        {
+            var userId = Convert.ToInt32(_httpContextAccessor.HttpContext?.Items["UserId"]);
+            return userId;
+        }
 
         public async Task<AuthenticateResponseDto> Authenticate(AuthenticateRequestDto model)
         {
@@ -78,6 +87,7 @@ namespace CodingTask.Application.Services
 
             return jwtToken;
         }
+
     }
 
 }

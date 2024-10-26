@@ -3,7 +3,7 @@ import { useStore } from 'vuex';
 import { Trash2, Plus, Minus } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Product } from '@/api/models'
-import { BASE_URL } from '@/api/http';
+import { BASE_API_URL } from '@/api/http';
 import { RootState } from '@/store';
 import { handleError } from '@/utils/errorHandler';
 
@@ -39,7 +39,7 @@ async function decrement(product: Product) {
 <template>
   <div class="border-b py-4 flex items-start justify-between">
     <div class="flex items-start space-x-4">
-      <img :src="BASE_URL + props.product.imgPath" width="80px" height="96px" alt="product image" />
+      <img :src="BASE_API_URL + props.product.images[0]" width="80px" height="96px" alt="product image" />
       <div>
         <h2 class="text-lg font-medium">{{ props.product.name }}</h2>
         <p class="text-sm text-[#6C7275]">

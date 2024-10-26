@@ -2,7 +2,6 @@
 using CodingTask.Application.Interfaces;
 using CodingTask.Data;
 using CodingTask.Data.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodingTask.Application.Services
@@ -10,17 +9,17 @@ namespace CodingTask.Application.Services
     public class CartService : ICartService
     {
         private readonly CodingTaskContext _context;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IAuthService _authService;
 
-        public CartService(CodingTaskContext context, IHttpContextAccessor httpContextAccessor)
+        public CartService(CodingTaskContext context, IAuthService authService)
         {
             _context = context;
-            _httpContextAccessor = httpContextAccessor;
+            _authService = authService;
         }
 
         public async Task<IEnumerable<CartItem>> GetCartItems()
         {
-            var userId = Convert.ToInt32(_httpContextAccessor.HttpContext?.Items["UserId"]);
+            var userId = _authService.GetCurrentUserId();
 
             return await _context.CartItems
                 .Where(c => c.UserId == userId)
@@ -30,7 +29,7 @@ namespace CodingTask.Application.Services
 
         public async Task AddToCart(int productId, int quantity)
         {
-            var userId = Convert.ToInt32(_httpContextAccessor.HttpContext?.Items["UserId"]);
+            var userId = _authService.GetCurrentUserId();
 
             var product = await _context.Products.FindAsync(productId);
             if (product == null)
@@ -73,7 +72,7 @@ namespace CodingTask.Application.Services
 
         public async Task RemoveFromCart(int productId)
         {
-            var userId = Convert.ToInt32(_httpContextAccessor.HttpContext?.Items["UserId"]);
+            var userId = _authService.GetCurrentUserId();
 
             var cartItem = await _context.CartItems
                 .FirstOrDefaultAsync(x => x.UserId == userId && x.ProductId == productId);
@@ -88,7 +87,7 @@ namespace CodingTask.Application.Services
 
         public async Task EmptyCart()
         {
-            var userId = Convert.ToInt32(_httpContextAccessor.HttpContext?.Items["UserId"]);
+            var userId = _authService.GetCurrentUserId();
             var cartItems = _context.CartItems.Where(x => x.UserId == userId);
             _context.CartItems.RemoveRange(cartItems);
             await _context.SaveChangesAsync();
