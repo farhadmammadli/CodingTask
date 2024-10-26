@@ -17,34 +17,7 @@ namespace CodingTask.Data
                 context.Users.Add(new Models.User
                 {
                     Username = "User1",
-                    Password = ""
-                });
-            }
-
-            if (!currentUsers.Exists(u => u.Username == "User2"))
-            {
-                context.Users.Add(new Models.User
-                {
-                    Username = "User2",
-                    Password = ""
-                });
-            }
-
-            if (!currentUsers.Exists(u => u.Username == "User3"))
-            {
-                context.Users.Add(new Models.User
-                {
-                    Username = "User3",
-                    Password = ""
-                });
-            }
-
-            if (!currentUsers.Exists(u => u.Username == "User4"))
-            {
-                context.Users.Add(new Models.User
-                {
-                    Username = "User4",
-                    Password = ""
+                    Password = "Password1"
                 });
             }
 
